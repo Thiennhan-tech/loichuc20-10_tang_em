@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gửi em ngày 20/10 💗</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0610;--pink:#ff5c8a;--soft:#ffd9e6;--glass:rgba(255,255,255,.07)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{background:radial-gradient(ellipse at 50% 15%,#2c1031 0%,var(--bg) 62%);color:var(--soft);font-family:'Quicksand',sans-serif}
+#fx{position:fixed;inset:0;z-index:0;pointer-events:none}
+.screen{position:fixed;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;transition:opacity .8s}
+.hidden{opacity:0;pointer-events:none}
+.title{font-family:'Dancing Script',cursive;font-size:clamp(2.4rem,9vw,3.8rem);color:var(--pink);text-shadow:0 0 22px rgba(255,92,138,.8);margin-bottom:10px}
+.sub{opacity:.75;margin-bottom:26px;line-height:1.6}
+.btn{padding:12px 28px;border-radius:30px;border:1.5px solid var(--pink);background:transparent;color:var(--soft);font:700 1rem 'Quicksand',sans-serif;cursor:pointer;transition:.25s}
+.btn:hover{background:var(--pink);color:#1a0a14;box-shadow:0 0 24px var(--pink)}
+
+/* ---- câu đố ---- */
+#quiz input{width:min(300px,80vw);padding:14px 18px;border-radius:30px;border:1.5px solid rgba(255,92,138,.6);background:var(--glass);color:var(--soft);font:600 1.1rem 'Quicksand',sans-serif;text-align:center;outline:none;margin-bottom:16px}
+#quiz input:focus{box-shadow:0 0 20px rgba(255,92,138,.5)}
+#qmsg{min-height:1.6em;margin-top:14px;font-size:.95rem;color:#ffb3cb}
+.shake{animation:shake .45s}
+@keyframes shake{20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-7px)}80%{transform:translateX(7px)}}
+
+/* ---- intro ---- */
+.bigheart{font-size:84px;cursor:pointer;animation:beat 1.2s infinite;filter:drop-shadow(0 0 22px #ff5c8a)}
+@keyframes beat{0%,100%{transform:scale(1)}20%{transform:scale(1.18)}40%{transform:scale(1)}60%{transform:scale(1.12)}}
+.sparkle{letter-spacing:.5em;color:var(--pink);opacity:.6;margin:14px 0}
+
+/* ---- kể chuyện ---- */
+#story{justify-content:space-between;padding:22px 16px calc(22px + env(safe-area-inset-bottom))}
+.dots{display:flex;gap:8px}
+.dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.2);transition:.4s}
+.dots i.on{background:var(--pink);box-shadow:0 0 10px var(--pink);transform:scale(1.25)}
+.frame{flex:1;width:100%;display:flex;align-items:center;justify-content:center;min-height:0}
+
+/* bông hoa */
+.flower{--S:min(88vw,44vh,340px);position:relative;width:var(--S);height:var(--S);animation:sway 4s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(2.5deg)}}
+.petal{position:absolute;left:50%;top:50%;width:calc(var(--S)*.23);height:calc(var(--S)*.36);
+  margin:calc(var(--S)*-.18) 0 0 calc(var(--S)*-.115);z-index:1;
+  border-radius:50% 50% 50% 50%/62% 62% 38% 38%;
+  background:radial-gradient(circle at 50% 80%,#ff2e6b,#ff8fb1 70%,#ffd1e0);
+  box-shadow:0 0 18px rgba(255,92,138,.6);
+  transform:rotate(var(--r)) translateY(calc(var(--S)*-.03)) scale(.28);
+  transition:transform 1s cubic-bezier(.2,1.5,.4,1) var(--d)}
+.petal:nth-child(even){background:radial-gradient(circle at 50% 80%,#e0457f,#ffb3cb 75%,#fff0f5)}
+.flower.open .petal{transform:rotate(var(--r)) translateY(calc(var(--S)*-.285)) scale(1)}
+.photo{position:absolute;left:25%;top:25%;width:50%;height:50%;border-radius:50%;overflow:hidden;z-index:2;
+  border:3px solid #fff0f5;box-shadow:0 0 28px rgba(255,92,138,.8);background:#2a1230;display:flex;align-items:center;justify-content:center}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .nopic{font-size:.78rem;line-height:1.4;padding:10px;cursor:pointer}
+#scratch{position:absolute;left:25%;top:25%;width:50%;height:50%;border-radius:50%;z-index:3;touch-action:none;opacity:0;pointer-events:none;transition:opacity .9s}
+.flower.open #scratch{opacity:1;pointer-events:auto}
+.flower.open #scratch.done{opacity:0;pointer-events:none}
+.bud{position:absolute;left:25%;top:25%;width:50%;height:50%;border-radius:50%;z-index:4;cursor:pointer;
+  background:radial-gradient(circle at 35% 30%,#ffb3cb,#ff5c8a 60%,#b8235a);box-shadow:0 0 30px rgba(255,92,138,.9);
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#fff;animation:beat 1.5s infinite;
+  transition:transform .8s,opacity .8s}
+.flower.open .bud{transform:scale(0);opacity:0;pointer-events:none}
+
+.say{width:100%;max-width:520px;background:var(--glass);border:1px solid rgba(255,92,138,.45);border-radius:20px;padding:18px 22px;min-height:104px;display:flex;align-items:center;justify-content:center;font-size:clamp(1.05rem,4vw,1.32rem);line-height:1.6;backdrop-filter:blur(8px);cursor:pointer;box-shadow:0 0 24px rgba(255,92,138,.18)}
+.tapme{margin-top:10px;font-size:.8rem;opacity:.6;animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.2}}
+
+/* ---- kết ---- */
+#end h2{font-family:'Dancing Script',cursive;font-size:clamp(2.4rem,10vw,4rem);color:var(--pink);text-shadow:0 0 24px rgba(255,92,138,.85);margin:10px 0}
+#end p{max-width:480px;line-height:1.7}
+.row{display:flex;gap:16px;margin-top:26px;justify-content:center}
+#final{display:none;flex-direction:column;align-items:center}
+.runaway{position:fixed;z-index:20;transition:left .25s ease,top .25s ease}
+.bloomrow{font-size:2rem;letter-spacing:.3em}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<input type="file" id="file" accept="image/*" hidden>
+
+<!-- 1. Câu đố -->
+<section class="screen" id="quiz">
+  <div class="sparkle">✧ ✦ ✧</div>
+  <h1 class="title">Khoan đã nè 🔐</h1>
+  <p class="sub" id="qtext">Trả lời đúng mới mở được quà.<br><b>Hôm nay là ngày gì nhỉ?</b></p>
+  <input id="qin" type="text" placeholder="Nhập câu trả lời…" autocomplete="off">
+  <button class="btn" id="qgo">Mở quà 🎁</button>
+  <div id="qmsg"></div>
+</section>
+
+<!-- 2. Trái tim -->
+<section class="screen hidden" id="intro">
+  <div class="sparkle">✧ ✦ ✧ ✦ ✧</div>
+  <h1 class="title">Gửi người tôi yêu</h1>
+  <p class="sub">Có điều bất ngờ nhỏ xíu dành cho em nè…</p>
+  <div class="bigheart" id="start">💗</div>
+  <p class="sub" style="margin-top:22px;font-size:.85rem">chạm vào trái tim nhé</p>
+</section>
+
+<!-- 3. Kể chuyện -->
+<section class="screen hidden" id="story">
+  <div class="dots" id="dots"></div>
+  <div class="frame" id="frame"></div>
+  <div style="width:100%;display:flex;flex-direction:column;align-items:center">
+    <div class="say" id="say"></div>
+    <div class="tapme" id="tapme"></div>
+  </div>
+</section>
+
+<!-- 4. Kết -->
+<section class="screen hidden" id="end">
+  <div id="ask" style="display:flex;flex-direction:column;align-items:center">
+    <div class="bloomrow">🌷🌸🌷</div>
+    <h2>Em có thích bất ngờ này không?</h2>
+    <div class="row">
+      <button class="btn" id="yes">Có</button>
+      <button class="btn" id="yes2">Có luôn</button>
+    </div>
+    <p class="sub" style="margin-top:22px;font-size:.8rem">(nút nào bấm được thì bấm nha 😏)</p>
+  </div>
+  <div id="final">
+    <div class="bloomrow">🌸🌷🌸</div>
+    <h2>Happy 20/10 💗</h2>
+    <p>Chúc người tôi yêu luôn vui vẻ, tràn đầy hạnh phúc, và đặc biệt luôn nở nụ cười trên môi em nhé.</p>
+    <p style="margin-top:12px;font-family:'Dancing Script',cursive;font-size:1.7rem;color:var(--pink)">Yêu em nhiều ♥</p>
+    <button class="btn" id="again" style="margin-top:24px">Xem lại từ đầu ↺</button>
+  </div>
+</section>
+
+<script>
+/* ====== TÙY CHỈNH ====== */
+const QUIZ_QUESTION="Hôm nay là ngày gì nhỉ?";            // đổi câu hỏi nếu muốn (vd: "Sinh nhật của em là ngày nào?")
+const QUIZ_CHECK=s=>{                                         // trả về true nếu đáp án đúng
+  s=s.toLowerCase().replace(/\s+/g,'');
+  return /^20[\/\-\.]?10/.test(s)||s.includes('phụnữ')||s.includes('phunu')||s.includes('20tháng10')||s.includes('20thang10');
+};
+const QUIZ_HINT="Gợi ý: ngày dành cho phụ nữ Việt Nam đó 💐 (dạng 20/10)";
+const STEPS=[
+  {t:"Nhân dịp 20/10 này,",                                             img:"anh1.jpg"},
+  {t:"Chúc người tôi yêu luôn vui vẻ, tràn đầy hạnh phúc,",             img:"anh2.jpg"},
+  {t:"và đặc biệt luôn nở nụ cười trên môi em nhé,",                    img:"anh3.jpg"},
+  {t:"em cười lên thì tui cũng không biết phân biệt đâu là em và đâu là hoa cả. 🌸", img:"anh4.jpg"}
+];
+/* ======================= */
+
+const $=id=>document.getElementById(id);
+const quiz=$('quiz'),intro=$('intro'),story=$('story'),end=$('end'),say=$('say'),frame=$('frame'),dots=$('dots'),tapme=$('tapme');
+$('qtext').innerHTML='Trả lời đúng mới mở được quà.<br><b>'+QUIZ_QUESTION+'</b>';
+STEPS.forEach(()=>dots.appendChild(document.createElement('i')));
+
+/* ---------- 1. Câu đố ---------- */
+let wrong=0;
+function tryQuiz(){
+  const v=$('qin').value.trim();
+  if(QUIZ_CHECK(v)){
+    quiz.classList.add('hidden');intro.classList.remove('hidden');burst(innerWidth/2,innerHeight/2,30);
+  }else{
+    wrong++;$('qmsg').textContent=wrong>=2?QUIZ_HINT:'Chưa đúng rồi nè, thử lại nha 🥺';
+    $('qin').classList.remove('shake');void $('qin').offsetWidth;$('qin').classList.add('shake');
+  }
+}
+$('qgo').onclick=tryQuiz;
+$('qin').addEventListener('keydown',e=>{if(e.key==='Enter')tryQuiz()});
+
+/* ---------- 3. Kể chuyện ---------- */
+let i=-1,typing=false,timer,opened=false,revealed=false,hasImg=false,flower,pickIdx=-1;
+
+function buildFlower(n){
+  frame.innerHTML='';opened=false;revealed=false;hasImg=false;
+  flower=document.createElement('div');flower.className='flower';
+  let h='';for(let k=0;k<10;k++)h+='<div class="petal" style="--r:'+(k*36)+'deg;--d:'+(k*60)+'ms"></div>';
+  h+='<div class="photo" id="photo"></div><canvas id="scratch" width="320" height="320"></canvas><div class="bud" id="bud">chạm nè 🌸</div>';
+  flower.innerHTML=h;frame.appendChild(flower);
+  loadPhoto(n);
+  $('bud').onclick=openFlower;
+  setTip();
+}
+function loadPhoto(n){
+  const box=$('photo');box.innerHTML='';
+  const saved=(()=>{try{return localStorage.getItem('photo'+n)}catch(_){return null}})();
+  const im=new Image();im.alt='Người tôi yêu';
+  im.onload=()=>{box.appendChild(im);hasImg=true;revealed=false;$('scratch').classList.remove('done');initScratch();setTip()};
+  im.onerror=()=>{
+    hasImg=false;revealed=true;
+    box.innerHTML='<div class="nopic">📷 chưa có<br><b>'+STEPS[n].img+'</b><br>chạm để chọn ảnh</div>';
+    box.onclick=()=>{if(opened&&!hasImg){pickIdx=n;$('file').click()}};
+    $('scratch').classList.add('done');setTip();
+  };
+  im.src=saved||STEPS[n].img;
+}
+$('file').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{const im=new Image();im.onload=()=>{
+    const s=Math.min(1,900/Math.max(im.width,im.height)),c=document.createElement('canvas');
+    c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+    try{localStorage.setItem('photo'+pickIdx,c.toDataURL('image/jpeg',.82))}catch(_){}
+    loadPhoto(pickIdx);
+  };im.src=r.result};
+  r.readAsDataURL(f);e.target.value='';
+});
+
+function openFlower(){
+  if(opened)return;opened=true;flower.classList.add('open');
+  const r=flower.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,26);
+  setTimeout(()=>typeText(STEPS[i].t),500);setTip();
+}
+function setTip(){
+  tapme.style.visibility='visible';
+  if(!opened){say.textContent='Chạm vào nụ hoa để hoa nở nhé 🌸';tapme.textContent='';}
+  else if(typing){tapme.style.visibility='hidden'}
+  else if(!revealed){tapme.textContent='✨ dùng ngón tay cào lớp mờ để xem ảnh ✨'}
+  else tapme.textContent=i>=STEPS.length-1?'chạm để đến phần cuối ♡':'chạm để tiếp tục ♡';
+}
+/* thẻ cào */
+function initScratch(){
+  const c=$('scratch'),x=c.getContext('2d'),w=c.width;
+  x.globalCompositeOperation='source-over';x.clearRect(0,0,w,w);
+  const g=x.createLinearGradient(0,0,w,w);g.addColorStop(0,'#d9c2cf');g.addColorStop(.5,'#f4e6ee');g.addColorStop(1,'#bfa3b4');
+  x.fillStyle=g;x.fillRect(0,0,w,w);
+  x.font='28px sans-serif';x.textAlign='center';x.globalAlpha=.55;
+  for(let a=0;a<5;a++)for(let b=0;b<5;b++)x.fillText('♥',a*70+20+(b%2)*30,b*70+40);
+  x.globalAlpha=1;x.fillStyle='#a8456f';x.font='700 26px Quicksand,sans-serif';x.fillText('cào nè ✨',w/2,w/2+8);
+  x.globalCompositeOperation='destination-out';
+  let down=false,cnt=0;
+  const pos=e=>{const r=c.getBoundingClientRect(),s=w/r.width;return[(e.clientX-r.left)*s,(e.clientY-r.top)*s]};
+  const dot=e=>{const[a,b]=pos(e);x.beginPath();x.arc(a,b,26,0,6.3);x.fill();
+    if(++cnt%5===0)check()};
+  function check(){
+    const d=x.getImageData(0,0,w,w).data;let t=0,k=0;
+    for(let p=3;p<d.length;p+=64){k++;if(d[p]<40)t++}
+    if(t/k>.42&&!revealed){revealed=true;c.classList.add('done');const r=flower.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,22);setTip()}
+  }
+  c.onpointerdown=e=>{down=true;c.setPointerCapture(e.pointerId);dot(e);e.stopPropagation()};
+  c.onpointermove=e=>{if(down)dot(e)};
+  c.onpointerup=c.onpointercancel=()=>{down=false;check()};
+}
+
+function typeText(txt){
+  clearInterval(timer);say.textContent='';typing=true;setTip();
+  let k=0;const ch=[...txt];
+  timer=setInterval(()=>{say.textContent+=ch[k++];
+    if(k>=ch.length){clearInterval(timer);typing=false;setTip()}},42);
+}
+function nextStep(){
+  i++;
+  if(i>=STEPS.length){story.classList.add('hidden');end.classList.remove('hidden');bloom();return}
+  [...dots.children].forEach((d,n)=>d.classList.toggle('on',n<=i));
+  buildFlower(i);
+}
+say.onclick=()=>{
+  if(!opened){flower.classList.remove('shake');void flower.offsetWidth;flower.classList.add('shake');return}
+  if(typing){clearInterval(timer);say.textContent=STEPS[i].t;typing=false;setTip();return}
+  if(!revealed){tapme.style.animation='none';void tapme.offsetWidth;tapme.style.animation='';return}
+  nextStep();
+};
+$('start').onclick=()=>{intro.classList.add('hidden');story.classList.remove('hidden');burst(innerWidth/2,innerHeight/2,30);nextStep()};
+
+/* ---------- 4. Kết: nút "Có luôn" chạy trốn ---------- */
+const yes2=$('yes2');
+function runAway(e){
+  e&&e.preventDefault();
+  yes2.classList.add('runaway');
+  const w=yes2.offsetWidth,h=yes2.offsetHeight;
+  yes2.style.left=Math.max(8,Math.random()*(innerWidth-w-16))+'px';
+  yes2.style.top=Math.max(8,Math.random()*(innerHeight-h-16))+'px';
+}
+yes2.addEventListener('pointerenter',runAway);
+yes2.addEventListener('pointerdown',runAway);
+yes2.addEventListener('touchstart',runAway,{passive:false});
+yes2.addEventListener('click',e=>{e.preventDefault();runAway()});
+$('yes').onclick=()=>{$('ask').style.display='none';$('final').style.display='flex';bloom()};
+$('again').onclick=()=>{
+  yes2.classList.remove('runaway');yes2.style.left=yes2.style.top='';
+  $('final').style.display='none';$('ask').style.display='flex';
+  i=-1;end.classList.add('hidden');story.classList.remove('hidden');nextStep();
+};
+
+/* ===== Hiệu ứng tim bay ===== */
+const cv=$('fx'),ctx=cv.getContext('2d');let W,H;
+const resize=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};addEventListener('resize',resize);resize();
+const cols=['#ff5c8a','#ff8fb1','#ff3d71','#ffb3cb','#c94b8f'];
+const hs=[];
+function spawn(x,y,b){hs.push({x:x??Math.random()*W,y:y??H+30,s:b?7+Math.random()*10:5+Math.random()*16,
+  vx:b?(Math.random()-.5)*7:(Math.random()-.5)*.5,vy:b?-(1+Math.random()*4):-(.4+Math.random()*1.1),
+  a:.25+Math.random()*.6,c:cols[Math.random()*cols.length|0],p:Math.random()*6.28,l:b?1:null})}
+function heart(h){ctx.save();ctx.translate(h.x,h.y);ctx.scale(h.s,h.s);ctx.globalAlpha=h.a;ctx.fillStyle=h.c;ctx.shadowColor=h.c;ctx.shadowBlur=12;
+  ctx.beginPath();ctx.moveTo(0,.3);ctx.bezierCurveTo(-1,-.6,-2,.6,0,1.9);ctx.bezierCurveTo(2,.6,1,-.6,0,.3);ctx.fill();ctx.restore()}
+for(let n=0;n<50;n++)spawn(Math.random()*W,Math.random()*H);
+(function loop(){
+  ctx.clearRect(0,0,W,H);
+  if(Math.random()<.14)spawn();
+  for(let n=hs.length-1;n>=0;n--){const h=hs[n];
+    h.p+=.03;h.x+=h.vx+Math.sin(h.p)*.4;h.y+=h.vy;
+    if(h.l!==null){h.l-=.012;h.a=Math.max(h.l,0)*.9;h.vx*=.985}
+    heart(h);if(h.y<-40||(h.l!==null&&h.l<=0))hs.splice(n,1)}
+  requestAnimationFrame(loop)
+})();
+function burst(x,y,n){for(let k=0;k<n;k++)spawn(x,y,true)}
+function bloom(){let k=0;const t=setInterval(()=>{burst(Math.random()*W,H*.7,18);if(++k>6)clearInterval(t)},350)}
+addEventListener('pointerdown',e=>{if(e.target.id!=='scratch')burst(e.clientX,e.clientY,6)});
+</script>
+</body>
+</html>
